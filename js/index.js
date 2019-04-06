@@ -67,15 +67,20 @@ function drawBall(){
     //se llama a la funcio a dibujar la paleta
     drawPaddle();
 
-    //verificar  si llego al limites de arriba/abajo
-    if (y +dy < 0 || y + dy > canvas.height){
-      dy= -dy;
-    }
-
-
     //verificar si llego al limite izquierdo/derecho
-    if (x + dx < 0 || x + dx > canvas.width ){
+    if (x + dx >canvas.width-ballRadius  || x + dx < ballRadius){
       dx = -dx;
+  }
+
+  if (y + dy < ballRadius){
+    dy= -dy;
+  } else if (y + dy > canvas.height - ballRadius) {
+    if(x > paddleX && paddleX + paddleWidth){
+      dy= -dy;
+    }else {
+    alert("Se acabo el juego PERDISTE");
+    document.location.reload();
+  }
   }
 
   //verificar si se toco la tecla dirreccional derecha
